@@ -1,2 +1,1 @@
-const controller = require("../controllers/controller")
-
+const controller = require("../controllers/Authcontroller")
