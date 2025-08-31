@@ -6,7 +6,7 @@ require("dotenv").config()
 
 function generateAccessToken(user) {
     return jwt.sign(
-        { id: user.id, username: user.username },
+        { id: user.id, username: user.username , fullname: user.fullname},
         process.env.ACCESS_TOKEN_SECRET,
         { expiresIn: "15m" }
     );
@@ -14,7 +14,7 @@ function generateAccessToken(user) {
 
 function generateRefreshToken(user) {
     return jwt.sign(
-        { id: user.id, username: user.username },
+        { id: user.id, username: user.username , fullname: user.fullname},
         process.env.REFRESH_TOKEN_SECRET,
         { expiresIn: "7d" }
     );
@@ -31,7 +31,7 @@ async function register(req, res) {
 
         const user = await db.createUser(username, fullname, email, hashedPassword)
 
-        res.json({ message: "user registered", user: { id: user.id, username: user.username } })
+        res.json({ message: "user registered", user: { id: user.id, username: user.username , fullname: user.fullname} })
     }
     catch (err) {
         console.log("registration error ", err)
