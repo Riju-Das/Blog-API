@@ -19,6 +19,7 @@ model User {
   email         String    @unique
   username      String    @unique
   fullname      String
+  password      String
   refreshTokens String[]  @default([])
   posts         Post[]
   comments      Comment[]
