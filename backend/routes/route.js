@@ -5,13 +5,13 @@ const authenticateToken = require("../config/authenticate")
 
 const route = express.Router()
 
-app.post("/register", Authcontroller.register);
+route.post("/register", Authcontroller.register);
 
-app.post("/login", Authcontroller.login);
+route.post("/login", Authcontroller.login);
 
-app.post("/refresh", Authcontroller.refresh);
+route.post("/refresh", Authcontroller.refresh);
 
-app.post("/logout", authenticateToken, Authcontroller.logout);
+route.post("/logout", authenticateToken, Authcontroller.logout);
 
 route.get("/user-detail", authenticateToken ,controller.getUserDetail)
 
