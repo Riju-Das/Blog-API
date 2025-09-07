@@ -58,7 +58,7 @@ async function login(req, res) {
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             secure: false,
-            sameSite: "none"
+            sameSite: "lax"
         })
 
         res.json({ accessToken })

@@ -7,7 +7,10 @@ const cors = require("cors");
 
 
 const app = express()
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173", // or your frontend URL
+    credentials: true
+}));
 
 app.use(express.json())
 app.use(cookieParser());
@@ -15,7 +18,7 @@ app.use(cookieParser());
 app.post("/api/register", Authcontroller.register);
 app.post("/api/login", Authcontroller.login);
 app.post("/api/refresh", Authcontroller.refresh);
-app.post("/api/logout", Authcontroller.logout);
+app.post("/api/logout", authenticateToken, Authcontroller.logout);
 
 app.use("/api", authenticateToken, route)
 

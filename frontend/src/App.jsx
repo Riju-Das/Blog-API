@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     getName()
-
+    
   },[]);
 
   const [data, setData] = useState("")

@@ -1,6 +1,6 @@
 import axios from "axios"
 
-let accessToken = localStorage.getItem("accessToken") || null
+let accessToken =  null
 
 const api = axios.create({
     baseURL: "/api",
@@ -20,13 +20,12 @@ api.interceptors.response.use(
         if (error.response.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
             try {
-                const res = await axios.post("/api/refresh",{
+                const res = await axios.post("/api/refresh",{},{
                     withCredentials:true
                 });
                 accessToken = res.data.accessToken;
-                localStorage.setItem("accessToken",accessToken)
                 originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
-                return api(accessToken)
+                return api(originalRequest)
 
             } 
             catch (err) {
@@ -38,9 +37,12 @@ api.interceptors.response.use(
     }
 )
 
+export const clearAccessToken = ()=>{
+    accessToken= null;
+}
+
 export const  setAccessToken = (token)=>{
     accessToken = token;
-    localStorage.setItem("accessToken", token);
 }
 
 export default api
