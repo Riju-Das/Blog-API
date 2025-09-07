@@ -15,12 +15,7 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser());
 
-app.post("/api/register", Authcontroller.register);
-app.post("/api/login", Authcontroller.login);
-app.post("/api/refresh", Authcontroller.refresh);
-app.post("/api/logout", authenticateToken, Authcontroller.logout);
-
-app.use("/api", authenticateToken, route)
+app.use("/api", route)
 
 app.listen(process.env.PORT, () => {
     console.log(`The app is listening to port no: ${process.env.PORT}`)
