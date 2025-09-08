@@ -15,4 +15,7 @@ route.post("/logout", authenticateToken, Authcontroller.logout);
 
 route.get("/user-detail", authenticateToken ,controller.getUserDetail)
 
+route.get("/posts", controller.getPosts)
+
+
 module.exports = route

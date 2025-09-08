@@ -64,10 +64,19 @@ async function findUserByRefreshToken(token) {
     });
 }
 
+async function  getPosts() {
+    return await prisma.post.findMany({
+        include:{
+            author:true
+        }
+    })
+}
+
 module.exports = {
     createUser,
     findUserByUsername,
     saveRefreshToken,
     removeRefreshToken,
-    findUserByRefreshToken
+    findUserByRefreshToken,
+    getPosts
 }
