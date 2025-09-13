@@ -27,14 +27,14 @@ function App() {
 
 
   return (
-    <>
+    <div className='h-screen flex flex-col'>
       <nav>
         <Navbar fullname={fullname} />
       </nav>
-      <main>
-        <Outlet />
+      <main className=' flex flex-col flex-1'>
+        <Outlet context={{fullname}} />
       </main>
-    </>
+    </div>
   )
 }
 
