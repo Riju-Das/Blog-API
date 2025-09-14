@@ -18,7 +18,21 @@ async function getPosts(req, res) {
     }
 }
 
+async function createPost(req,res){
+    const user = req.user;
+    const {title,content} = req.body
+    try{
+        const post = await db.createPost(title,content,user.id)
+        return res.status(201).json(post)
+    }
+    catch(err){
+        return res.status(400).json({message:"Error creating post"})
+    }
+
+}
+
 module.exports = {
     getUserDetail,
-    getPosts
+    getPosts,
+    createPost
 }

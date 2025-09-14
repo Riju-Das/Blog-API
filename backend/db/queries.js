@@ -72,11 +72,22 @@ async function  getPosts() {
     })
 }
 
+async function createPost(title,content,authorId){
+    return await prisma.post.create({
+        data:{
+            title:title,
+            content:content,
+            authorId:authorId,
+        }
+    })
+}
+
 module.exports = {
     createUser,
     findUserByUsername,
     saveRefreshToken,
     removeRefreshToken,
     findUserByRefreshToken,
-    getPosts
+    getPosts,
+    createPost
 }

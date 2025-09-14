@@ -4,28 +4,33 @@ import Dashboard from "./pages/dashboard"
 import { redirect } from 'react-router-dom';
 import LoginPage from './pages/login';
 import Register from './pages/register';
+import CreatePost from './pages/createpost';
 const Router = [
     {
-        path:"/",
-        element: < App/>,
+        path: "/",
+        element: < App />,
         children: [
             {
                 index: true,
-                element: <Navigate to="dashboard"/>
+                element: <Navigate to="dashboard" />
             },
             {
                 path: "dashboard",
-                element: <Dashboard/>
+                element: <Dashboard />
             }
         ]
     },
     {
         path: "/login",
-        element: <LoginPage/>
+        element: <LoginPage />
     },
     {
         path: "/register",
-        element: <Register/>
+        element: <Register />
+    },
+    {
+        path: "/create-post",
+        element: <CreatePost/>
     }
 ]
 

@@ -44,9 +44,16 @@ function Dashboard() {
               <div className="font-bold text-4xl">
                 Be the first to post
               </div>
-              <Link to="/create" className="bg-black rounded-4xl text-white text-2xl w-25 h-10 justify-center items-center text-center ">
+              <Link to="/create-post" className="bg-black rounded-4xl text-white text-2xl w-25 h-10 justify-center items-center text-center ">
                 create
               </Link>
+            </div>
+          )
+        }
+        {
+          loaded && !isError && fullname && (
+            <div>
+              
             </div>
           )
         }

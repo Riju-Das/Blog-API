@@ -17,5 +17,7 @@ route.get("/user-detail", authenticateToken ,controller.getUserDetail)
 
 route.get("/posts", controller.getPosts)
 
+route.post("/posts" , authenticateToken, controller.createPost)
+
 
 module.exports = route
