@@ -1,4 +1,5 @@
 const db = require("../db/queries")
+
 async function getUserDetail(req, res) {
     const user = req.user;
     res.json({
