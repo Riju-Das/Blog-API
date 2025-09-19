@@ -88,13 +88,38 @@ async function getPostById(id){
         },
         include:{
             author:true,
-            comments:true
+            comments:{
+                include:{
+                    author:true
+                },
+                orderBy:{
+                    createdAt: 'desc'
+                }
+            }
         }
     })
 }
 
 async function deletePost(id) {
     await prisma.post.delete({
+        where:{
+            id:id
+        }
+    })
+}
+
+async function createComment(content,AuthorId, postId){
+    return await prisma.comment.create({
+        data:{
+            content:content,
+            authorId: AuthorId,
+            postId:postId
+        }
+    })
+}
+
+async function deleteComment(id){
+    await prisma.comment.delete({
         where:{
             id:id
         }
@@ -110,5 +135,7 @@ module.exports = {
     getPosts,
     createPost,
     getPostById,
-    deletePost
+    deletePost,
+    createComment,
+    deleteComment
 }

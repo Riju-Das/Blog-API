@@ -48,11 +48,34 @@ async function getPostById(req, res) {
 async function deletePost(req, res) {
     const { id } = req.params
     try {
-        await db.deletePost(id) 
+        await db.deletePost(id)
         return res.status(200).json({ message: "Post deleted successfully" });
     }
     catch (err) {
         return res.status(400).json({ message: "Server Error deleting post" })
+    }
+}
+
+async function addComment(req, res) {
+    const user = req.user;
+    const { id } = req.params;
+    const { content } = req.body;
+    try {
+        const comment = await db.createComment(content, user.id, id);
+        return res.status(201).json(comment);
+    } catch (err) {
+        return res.status(400).json({ message: "Error adding comment" });
+    }
+}
+
+async function deleteComment(req, res) {
+    const { id } = req.params;
+    try {
+        await db.deleteComment(id)
+        return res.status(200).json({ message: "Comment deleted successfully" });
+    }
+    catch (err) {
+        return res.status(400).json({ message: "Error deleting comment" })
     }
 }
 
@@ -62,5 +85,7 @@ module.exports = {
     createPost,
     getPostById,
     getPostById,
-    deletePost
+    deletePost,
+    addComment,
+    deleteComment
 }

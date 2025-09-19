@@ -23,5 +23,8 @@ route.get("/post/:id" , controller.getPostById)
 
 route.delete("/post/:id", authenticateToken , controller.deletePost)
 
+route.post("/post/:id/comment" , authenticateToken , controller.addComment)
+
+route.delete("/comment/:id", authenticateToken, controller.deleteComment)
 
 module.exports = route
