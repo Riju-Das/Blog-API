@@ -31,7 +31,7 @@ function Navbar({ fullname }) {
                 <div className="text-2xl">
                   {fullname}
                 </div>
-                <button className="logout-btn cursor-pointer w-30 h-10 text-1xl flex items-center justify-center"
+                <button className="logout-btn cursor-pointer w-30 h-10 text-1xl flex items-center justify-center bg-[#1a1a1a]"
                   onClick={handleClick}
                 >
                   logout

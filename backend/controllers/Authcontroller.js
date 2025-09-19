@@ -114,6 +114,10 @@ async function logout(req, res) {
     }
 }
 
+async function deletePost(req,res){
+    
+}
+
 
 
 module.exports = {

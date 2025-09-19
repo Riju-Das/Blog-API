@@ -58,11 +58,11 @@ function CreatePost() {
         name="content" 
         id="content" 
         value={content}
-        className="bg-white rounded-xl md:w-[60%] md:h-[80%] border-1 p-5"
+        className="bg-white rounded-xl md:w-[60%] md:h-[80%] border-1 p-5 whitespace-pre-line"
         onChange={e=>setContent(e.target.value)}
         required
         />
-        <button className="text-white mt-6 " type="submit">Submit</button>
+        <button className="text-white mt-6 bg-black " type="submit">Submit</button>
 
       </form>
     </div>

@@ -27,7 +27,7 @@ function Dashboard() {
     getPosts()
   }, []);
 
-  async function handlePostClick(id){
+  async function handlePostClick(id) {
     navigate(`/post/${id}`)
   }
 
@@ -57,20 +57,20 @@ function Dashboard() {
           )
         }
         {
-          loaded && !isError && fullname && (
+          loaded && !isError && posts.length !== 0 &&(
             <>
               <div className="flex flex-wrap gap-6 p-4 justify-between w-[85%] "
-                
+
               >
                 {posts.map((post) => (
                   <div
                     key={post.id}
                     className="bg-white rounded-xl shadow-md p-6 flex flex-col gap-2 md:w-180 h-50 cursor-pointer hover:bg-gray-50"
-                    onClick={()=>handlePostClick(post.id)}
+                    onClick={() => handlePostClick(post.id)}
                   >
                     <div className="font-bold text-2xl mb-2">{post.title}</div>
-                    <div className="text-gray-700 mb-4 line-clamp-1"  >{post.content}</div>
-                    <div className="flex justify-between items-center text-sm text-gray-500 mt-4">
+                    <div className="text-gray-700 mb-4  whitespace-pre-line line-clamp-1"  >{post.content}</div>
+                    <div className="flex justify-between items-center  text-sm text-gray-500 mt-4">
                       <span>Author: {post.author.fullname}</span>
                       <span>
                         Created: {new Date(post.createdAt).toLocaleString()}
@@ -79,11 +79,13 @@ function Dashboard() {
                   </div>
                 ))}
               </div>
-            
-              <Link to="/create-post" className="bg-black rounded-4xl text-white mb-10 text-2xl w-25 h-10 justify-center items-center text-center ">
-                create
-              </Link>
-            
+              {
+                fullname && (
+                  <Link to="/create-post" className="bg-black rounded-4xl text-white mb-10 text-2xl w-25 h-10 justify-center items-center text-center ">
+                    create
+                  </Link>
+                )
+              }
             </>
           )
         }

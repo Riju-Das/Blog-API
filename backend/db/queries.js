@@ -93,6 +93,14 @@ async function getPostById(id){
     })
 }
 
+async function deletePost(id) {
+    await prisma.post.delete({
+        where:{
+            id:id
+        }
+    })
+}
+
 module.exports = {
     createUser,
     findUserByUsername,
@@ -101,5 +109,6 @@ module.exports = {
     findUserByRefreshToken,
     getPosts,
     createPost,
-    getPostById
+    getPostById,
+    deletePost
 }

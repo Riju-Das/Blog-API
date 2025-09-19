@@ -21,5 +21,7 @@ route.post("/posts" , authenticateToken, controller.createPost)
 
 route.get("/post/:id" , controller.getPostById)
 
+route.delete("/post/:id", authenticateToken , controller.deletePost)
+
 
 module.exports = route
