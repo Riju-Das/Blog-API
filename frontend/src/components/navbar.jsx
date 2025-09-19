@@ -15,6 +15,9 @@ function Navbar({ fullname }) {
   return (
     <>
       <div className="navbar-container flex h-20 bg-black w-full text-white items-center justify-center">
+        <Link to="/dashboard" className="text-3xl font-bold justify-start">
+          BlogApi
+        </Link>
         <div className="inside-container w-[80%] flex items-center justify-end  ">
           {fullname === "" ? (
             <>

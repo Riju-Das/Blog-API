@@ -15,6 +15,7 @@ function Register() {
   async function handleSubmit(e) {
     
     try {
+      e.preventDefault();
       await api.post("/register", {
         username,
         fullname,

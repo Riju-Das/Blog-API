@@ -5,6 +5,7 @@ import { redirect } from 'react-router-dom';
 import LoginPage from './pages/login';
 import Register from './pages/register';
 import CreatePost from './pages/createpost';
+import Postpage from './pages/postpage';
 const Router = [
     {
         path: "/",
@@ -17,6 +18,10 @@ const Router = [
             {
                 path: "dashboard",
                 element: <Dashboard />
+            },
+            {
+                path: "post/:id",
+                element: <Postpage/>
             }
         ]
     },

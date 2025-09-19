@@ -19,5 +19,7 @@ route.get("/posts", controller.getPosts)
 
 route.post("/posts" , authenticateToken, controller.createPost)
 
+route.get("/post/:id" , controller.getPostById)
+
 
 module.exports = route

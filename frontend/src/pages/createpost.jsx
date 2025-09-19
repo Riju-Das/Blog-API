@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import api from "../api/api"
 import { useState,useEffect } from "react"
 
+
 function CreatePost() {
 
   const navigate = useNavigate()

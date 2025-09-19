@@ -29,11 +29,26 @@ async function createPost(req,res){
     catch(err){
         return res.status(400).json({message:"Error creating post"})
     }
+}
 
+async function getPostById(req,res){
+    const { id } = req.params;
+    try{
+        const post = await db.getPostById(id);
+        if(!post){
+            return res.status(404).json({message: "Error post does not exist"})
+        }
+        return res.status(200).json(post)
+    }
+    catch(err){
+        return res.status(400).json({message: "Server Error fetching post"})
+    }
 }
 
 module.exports = {
     getUserDetail,
     getPosts,
-    createPost
+    createPost,
+    getPostById,
+    getPostById
 }

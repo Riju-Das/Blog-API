@@ -81,6 +81,17 @@ async function createPost(title,content,authorId){
         }
     })
 }
+async function getPostById(id){
+    return await prisma.post.findUnique({
+        where:{
+            id:id
+        },
+        include:{
+            author:true,
+            comments:true
+        }
+    })
+}
 
 module.exports = {
     createUser,
@@ -89,5 +100,6 @@ module.exports = {
     removeRefreshToken,
     findUserByRefreshToken,
     getPosts,
-    createPost
+    createPost,
+    getPostById
 }

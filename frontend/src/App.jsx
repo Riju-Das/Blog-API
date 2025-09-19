@@ -7,11 +7,13 @@ import api, { setAccessToken } from './api/api.js'
 function App() {
 
   const [fullname, setFullname] = useState("")
+  const [username , setUsername] = useState("")
 
   async function getName() {
     try {
       const res = await api.get("/user-detail")
       setFullname(res.data.fullname)
+      setUsername(res.data.username)
     }
     catch (err) {
       setFullname("")
@@ -32,7 +34,7 @@ function App() {
         <Navbar fullname={fullname} />
       </nav>
       <main className=' flex flex-col flex-1'>
-        <Outlet context={{fullname}} />
+        <Outlet context={{fullname,username}} />
       </main>
     </div>
   )

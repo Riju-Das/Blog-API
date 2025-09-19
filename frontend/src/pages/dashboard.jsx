@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import api from "../api/api";
 import { useOutletContext } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Dashboard() {
+
+  const navigate = useNavigate()
 
   const { fullname } = useOutletContext();
 
@@ -24,6 +26,10 @@ function Dashboard() {
   useEffect(() => {
     getPosts()
   }, []);
+
+  async function handlePostClick(id){
+    navigate(`/post/${id}`)
+  }
 
   console.log(fullname)
 
@@ -53,12 +59,14 @@ function Dashboard() {
         {
           loaded && !isError && fullname && (
             <>
-              <div className="flex flex-wrap gap-6 p-4 justify-between w-[85%] ">
+              <div className="flex flex-wrap gap-6 p-4 justify-between w-[85%] "
+                
+              >
                 {posts.map((post) => (
-
                   <div
                     key={post.id}
                     className="bg-white rounded-xl shadow-md p-6 flex flex-col gap-2 md:w-180 h-50 cursor-pointer hover:bg-gray-50"
+                    onClick={()=>handlePostClick(post.id)}
                   >
                     <div className="font-bold text-2xl mb-2">{post.title}</div>
                     <div className="text-gray-700 mb-4 line-clamp-1"  >{post.content}</div>
