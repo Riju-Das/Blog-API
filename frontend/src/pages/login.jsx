@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"
-import api, { setAccessToken } from "../api/api"
+import api from "../api/api"
 import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../store/userStore";
 function LoginPage() {
   const navigate = useNavigate()
+
+  const setUser = useUserStore(state => state.setUser);
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -22,11 +25,12 @@ function LoginPage() {
         username,
         password
       })
-      setAccessToken(res.data.accessToken)
-      setError("")
-      navigate("/")
-    }
+      const userRes = await api.get("/user-detail");
+      setUser(userRes.data.fullname, userRes.data.username, res.data.accessToken);
+      setError("");
+      navigate("/");
 
+    }
     catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
         setError(err.response.data.message)

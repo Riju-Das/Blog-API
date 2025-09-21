@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom"
-import api, { clearAccessToken } from "../api/api"
-function Navbar({ fullname }) {
+import api from "../api/api"
+import { useUserStore } from "../store/userStore";
+function Navbar() {
+  const fullname = useUserStore(state => state.fullname);
+  const clearUser = useUserStore(state=>state.clearUser)
 
   async function handleClick() {
     try {
       await api.post("/logout");
+
     } catch (err) {
       console.error("Logout failed:", err);
     }
-    clearAccessToken();
+    clearUser()
     window.location.reload();
   }
 

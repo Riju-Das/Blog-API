@@ -1,6 +1,7 @@
 import axios from "axios"
+import { useUserStore } from "../store/userStore"
 
-let accessToken =  null
+
 
 const api = axios.create({
     baseURL: "/api",
@@ -8,6 +9,7 @@ const api = axios.create({
 })
 
 api.interceptors.request.use(config => {
+    const accessToken = useUserStore.getState().accessToken;
     if (accessToken) config.headers["Authorization"] = `Bearer ${accessToken}`
     return config;
 })
@@ -20,14 +22,15 @@ api.interceptors.response.use(
         if (error.response.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
             try {
-                const res = await axios.post("/api/refresh",{},{
-                    withCredentials:true
+                const res = await axios.post("/api/refresh", {}, {
+                    withCredentials: true
                 });
-                accessToken = res.data.accessToken;
-                originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
+                const setAccessToken = useUserStore.getState().setAccessToken;
+                setAccessToken(res.data.accessToken);
+                originalRequest.headers["Authorization"] = `Bearer ${res.data.accessToken}`;
                 return api(originalRequest)
 
-            } 
+            }
             catch (err) {
                 console.error("Refresh token failed", err.response?.data);
                 return Promise.reject(err);
@@ -37,12 +40,5 @@ api.interceptors.response.use(
     }
 )
 
-export const clearAccessToken = ()=>{
-    accessToken= null;
-}
-
-export const  setAccessToken = (token)=>{
-    accessToken = token;
-}
 
 export default api

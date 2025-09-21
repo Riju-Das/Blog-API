@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import api from "../api/api";
-import { useOutletContext } from "react-router-dom";
 import { Link, useNavigate } from "react-router-dom";
+import { useUserStore } from "../store/userStore";
 
 function Dashboard() {
 
   const navigate = useNavigate()
 
-  const { fullname } = useOutletContext();
+  const fullname = useUserStore(state=>state.fullname)
 
   const [posts, setPosts] = useState([])
   const [loaded, setLoaded] = useState(false)

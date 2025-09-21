@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../api/api";
-import { useOutletContext } from "react-router-dom";
+import { useUserStore } from "../store/userStore";
 
 function Postpage() {
   const navigate = useNavigate()
   const { id } = useParams();
-  const { fullname, username } = useOutletContext();
+  const username = useUserStore(state=>state.username)
   const [post, setPost] = useState({})
   const [error, setError] = useState(null)
   const [loaded, setLoaded] = useState(false)
   const [comments, setComments] = useState([])
   const [commentBox, setCommentBox] = useState(false)
   const [comment, setComment] = useState("")
+
 
   async function getPost() {
     try {
